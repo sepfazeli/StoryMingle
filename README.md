@@ -1,137 +1,89 @@
-🚀 StoryMingle
+# 🚀 StoryMingle
+**Collaborative Storytelling Platform**
 
-Collaborative Storytelling Platform
+![Platform](https://img.shields.io/badge/platform-iOS-blue.svg) ![SwiftUI](https://img.shields.io/badge/SwiftUI-Compatible-brightgreen.svg) ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) ![Build Status](https://img.shields.io/github/actions/workflow/status/sepfazeli/StoryMingle/ci.yml?branch=main)
 
-[] [] [] []
+![StoryMingle Banner](./Assets/banner.png)
 
-🔍 Overview
+---
 
-StoryMingle is an iOS application enabling real-time, multi-author storytelling. Contributors can start, continue, and upvote paragraphs within a shared narrative, leveraging SwiftUI, Combine, and Firebase (Auth, Firestore, Messaging, App Check).
+## 🔍 Overview
+StoryMingle is a SwiftUI iOS application that enables real-time, multi-author storytelling. Users can start a story, add or continue paragraphs, and upvote contributions. Backend is powered by Firebase Auth, Firestore, App Check, and Cloud Messaging.
 
-✨ Key Highlights
+---
 
-Real-Time Collaboration: Live updates via Firestore snapshot listeners.
+## 🛠 Tech Stack & Architecture
+| Layer             | Technology                                     |
+| ----------------- | ---------------------------------------------- |
+| **UI**            | SwiftUI, UIKit (AppDelegate)                   |
+| **State**         | Combine, @Published, @StateObject              |
+| **Backend**       | Firebase Auth, Firestore, App Check, FCM       |
+| **Security**      | SMS 2FA, Synthetic Email, App Check            |
+| **Dependency**    | CocoaPods / SwiftPM                            |
+| **CI/CD & Tests** | GitHub Actions, Fastlane, TestFlight, XCTest   |
 
-Secure Authentication: Phone-based SMS 2FA with synthetic email namespace.
+**Architecture** follows MVVM with clear separation:
+StoryMingle/
+├ AppDelegate.swift # Firebase, APNs
+├ StoryMingleApp.swift # @main, SwiftUI Scene
+├ Models/ # User, Story, Paragraph, Reaction
+├ Services/ # AuthService, FirestoreService, StorageService
+├ ViewModels/ # ObservableObjects for each feature
+├ Views/ # SwiftUI screens & reusable components
+├ Resources/ # Assets, Plists, LaunchScreen
+├ CI/ # Workflows & Fastlane configs
+└ README.md # Project documentation
 
-Interactive UI: SwiftUI-driven components with animations and tap-to-reveal author metadata.
 
-Modular Architecture: MVVM pattern, clear separation of Views, ViewModels, Services, Models.
+---
 
-Analytics & Logging: Crash reporting and usage metrics via Firebase Analytics.
+## 🔥 Features
+- **Real-Time Collaboration**: Firestore snapshot listeners deliver live updates.
+- **Secure Authentication**: Phone-based SMS 2FA with synthetic email addresses.
+- **Story Management**: Create, edit, delete stories with configurable max contributions.
+- **Collaborative Flow**:
+  - Add new paragraphs or continue the previous one
+  - Upvote to influence story direction
+  - Tap any paragraph to reveal its author
+- **Genre Browser**: Filter by Fantasy, Horror, Romance, Sci-Fi, Mystery, Thriller, Historical, Comedy, Adventure.
+- **Profile & Stats**: Update bio, view stories & contributions count, guest mode, account deletion.
 
-🛠️ Tech Stack
+---
 
-Category
-
-Technology
-
-UI & UX
-
-SwiftUI, UIKit (AppDelegate)
-
-State Management
-
-Combine, @Published, @StateObject
-
-Backend
-
-Firebase Auth, Firestore, Cloud Messaging (FCM)
-
-Security
-
-Firebase App Check, SMS Multi-Factor Auth
-
-Dependency Mgmt
-
-CocoaPods / Swift Package Manager
-
-CI/CD
-
-GitHub Actions, Fastlane, TestFlight
-
-🔧 Setup & Installation
-
-Clone the repository
-
-git clone https://github.com/sepfazeli/StoryMingle.git
-cd StoryMingle
-
-Install dependencies
-
+## 🚀 Quick Start
+1. **Clone & Install**
+   ```bash
+   git clone https://github.com/sepfazeli/StoryMingle.git
+   cd StoryMingle
+Dependencies
 CocoaPods:
-
 pod install
 open StoryMingle.xcworkspace
+SwiftPM: Add Firebase packages via Xcode’s Swift Packages tab.
+Firebase Setup
+Copy GoogleService-Info.plist into the project root.
+In Firebase Console:
+Auth → enable Phone provider
+Firestore → configure security rules
+App Check → enable for device integrity
+Cloud Messaging → configure APNs
+Environment
+Create a .env file (ignored by Git) for any secret toggles or flags.
+Run
+xcodebuild -scheme StoryMingle -destination 'platform=iOS Simulator,name=iPhone 16 Pro' build
+or open in Xcode and press ▶️
+✅ CI/CD & Testing
 
-SwiftPM: Add Firebase SDKs in Project Settings → Swift Packages
+GitHub Actions: Lint, unit tests, UI tests on PRs.
+Fastlane: Automate builds, screenshots, TestFlight deployments.
+TestFlight: Internal & External beta groups with customized instructions.
+Unit Tests: XCTest coverage for ViewModels & Services.
+UI Tests: SwiftUI interaction and snapshot tests.
+🤝 Contribute
 
-Configure Firebase
-
-Copy your GoogleService-Info.plist into the project root.
-
-In Firebase Console, enable:
-
-Authentication → Phone Provider
-
-Firestore → Set rules for real-time access
-
-App Check → Device integrity checks
-
-Cloud Messaging → APNs & FCM integration
-
-Environment Variables
-Create an .env file (ignored by Git) to override any sensitive configs.
-
-Build & Run
-
-Select iOS 16.0+ simulator or device
-
-Hit Run in Xcode
-
-📂 Project Architecture
-
-StoryMingle
-├── AppDelegate.swift       # UIKit integration, Firebase init, APNs
-├── StoryMingleApp.swift    # @main entry, SwiftUI Scene
-├── Models/                 # Codable structs: User, Story, Paragraph, Reaction
-├── Services/               # Firebase wrappers: AuthService, FirestoreService, StorageService
-├── ViewModels/             # ObservableObjects: AuthViewModel, StoryListViewModel, etc.
-├── Views/                  # SwiftUI screens & reusable components
-│   ├── Auth/               # Login, SignUp, SMSCode View
-│   ├── Home/               # StoryListView, GenreListView, ProfileView
-│   └── StoryDetail/        # StoryDetailView, Create/Edit Story
-├── Resources/              # Assets, LaunchScreen, Info.plist
-├── CI/                     # GitHub Actions workflows, Fastlane config
-└── README.md               # Project documentation
-
-🚦 CI/CD & Testing
-
-GitHub Actions: Automated linting, unit tests, UI tests on each PR.
-
-Fastlane: Builds, exports, and uploads to TestFlight.
-
-TestFlight: Internal & external beta distribution with customized test instructions.
-
-Unit Tests: XCTest for ViewModels and Services.
-
-UI Tests: SwiftUI snapshots and interaction flows.
-
-🤝 Contributing
-
-Fork the repo
-
-Create a feature branch: git checkout -b feat/YourFeature
-
-Implement and test your changes
-
-Commit with clear messages: git commit -m "feat: Add ..."
-
-Push and open a PR against main
-
-Please follow the Code of Conduct and check existing issues before submitting.
-
-📄 License
-
-This project is licensed under the MIT License © 2025 Sepehr Fazely
-
+Fork and clone this repo.
+Create a branch: git checkout -b feat/YourFeature
+Develop and test your changes.
+Commit with semantic messages:
+git commit -m "feat: add new paragraph feature"
+Push and open a pull request targeting main.
