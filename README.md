@@ -1,85 +1,137 @@
-# StoryMingle
-Collaborative storytelling iOS app built with SwiftUI &amp; Firebase (SMS-2FA, real-time contributions)
+🚀 StoryMingle
 
+Collaborative Storytelling Platform
 
-An interactive iOS app that lets you co-write and share stories paragraph by paragraph. Built with SwiftUI and Firebase, StoryMingle features SMS-based two-factor authentication, real-time story flows, upvoting, genre browsing, and personal profile stats.
+[] [] [] []
 
+🔍 Overview
 
+StoryMingle is an iOS application enabling real-time, multi-author storytelling. Contributors can start, continue, and upvote paragraphs within a shared narrative, leveraging SwiftUI, Combine, and Firebase (Auth, Firestore, Messaging, App Check).
 
-🚀 Features
+✨ Key Highlights
 
-Secure AuthenticationUsername + synthetic email + SMS two-factor via Firebase Auth
+Real-Time Collaboration: Live updates via Firestore snapshot listeners.
 
-Create & Manage Stories• New story setup: title, genre, opening paragraph, max contributions• Edit or delete your own stories in My Stories
+Secure Authentication: Phone-based SMS 2FA with synthetic email namespace.
 
-Collaborative Flow• Read “Full Story Flow” and tap a paragraph to reveal its author• Add a fresh paragraph or continue the previous one• Upvote contributions to influence story direction
+Interactive UI: SwiftUI-driven components with animations and tap-to-reveal author metadata.
 
-Genre BrowserFilter stories by Fantasy, Horror, Romance, Sci-Fi, Mystery, Thriller, Historical, Comedy, Adventure
+Modular Architecture: MVVM pattern, clear separation of Views, ViewModels, Services, Models.
 
-Profile & Stats• Edit your bio• View counts for stories created and contributions made• Guest mode and delete-account flow
+Analytics & Logging: Crash reporting and usage metrics via Firebase Analytics.
 
-📋 Requirements
+🛠️ Tech Stack
 
-Xcode 15+
+Category
 
-iOS 16+ deployment target
+Technology
 
-CocoaPods or Swift Package Manager
+UI & UX
 
-A Firebase project with Auth, Firestore, App Check & FCM configured
+SwiftUI, UIKit (AppDelegate)
 
-🔧 Getting Started
+State Management
 
-Clone the repo
+Combine, @Published, @StateObject
+
+Backend
+
+Firebase Auth, Firestore, Cloud Messaging (FCM)
+
+Security
+
+Firebase App Check, SMS Multi-Factor Auth
+
+Dependency Mgmt
+
+CocoaPods / Swift Package Manager
+
+CI/CD
+
+GitHub Actions, Fastlane, TestFlight
+
+🔧 Setup & Installation
+
+Clone the repository
 
 git clone https://github.com/sepfazeli/StoryMingle.git
 cd StoryMingle
 
-Install Dependencies
+Install dependencies
 
-If using CocoaPods:
+CocoaPods:
 
 pod install
 open StoryMingle.xcworkspace
 
-If using Swift Package Manager, add the Firebase packages to the project.
+SwiftPM: Add Firebase SDKs in Project Settings → Swift Packages
 
-Firebase Setup
+Configure Firebase
 
-Copy your GoogleService-Info.plist into the Xcode project’s root.
+Copy your GoogleService-Info.plist into the project root.
 
-Enable Phone Auth, Firestore, App Check, Cloud Messaging in the Firebase console.
+In Firebase Console, enable:
 
-RunBuild and run on a simulator or device.
+Authentication → Phone Provider
 
-🛠 Project Structure
+Firestore → Set rules for real-time access
 
-StoryMingle/
-├─ AppDelegate.swift       # Firebase & APNs setup
-├─ StoryMingleApp.swift    # SwiftUI App entry point
-├─ Views/                  # All SwiftUI screens and components
-├─ ViewModels/             # Combine-based state managers
-├─ Services/               # AuthService, FirestoreService, StorageService
-├─ Models/                 # User, Story, Paragraph, Genre
-├─ Assets/                 # Images, Colors, Fonts
-├─ Resources/              # Launch screens, Plists
-├─ README.md               # Project documentation
-└─ .gitignore              # Excludes build files & secrets
+App Check → Device integrity checks
+
+Cloud Messaging → APNs & FCM integration
+
+Environment Variables
+Create an .env file (ignored by Git) to override any sensitive configs.
+
+Build & Run
+
+Select iOS 16.0+ simulator or device
+
+Hit Run in Xcode
+
+📂 Project Architecture
+
+StoryMingle
+├── AppDelegate.swift       # UIKit integration, Firebase init, APNs
+├── StoryMingleApp.swift    # @main entry, SwiftUI Scene
+├── Models/                 # Codable structs: User, Story, Paragraph, Reaction
+├── Services/               # Firebase wrappers: AuthService, FirestoreService, StorageService
+├── ViewModels/             # ObservableObjects: AuthViewModel, StoryListViewModel, etc.
+├── Views/                  # SwiftUI screens & reusable components
+│   ├── Auth/               # Login, SignUp, SMSCode View
+│   ├── Home/               # StoryListView, GenreListView, ProfileView
+│   └── StoryDetail/        # StoryDetailView, Create/Edit Story
+├── Resources/              # Assets, LaunchScreen, Info.plist
+├── CI/                     # GitHub Actions workflows, Fastlane config
+└── README.md               # Project documentation
+
+🚦 CI/CD & Testing
+
+GitHub Actions: Automated linting, unit tests, UI tests on each PR.
+
+Fastlane: Builds, exports, and uploads to TestFlight.
+
+TestFlight: Internal & external beta distribution with customized test instructions.
+
+Unit Tests: XCTest for ViewModels and Services.
+
+UI Tests: SwiftUI snapshots and interaction flows.
 
 🤝 Contributing
 
-Fork this repository
+Fork the repo
 
-Create a feature branch (git checkout -b feat/YourFeature)
+Create a feature branch: git checkout -b feat/YourFeature
 
-Commit your changes (git commit -m "Add feature")
+Implement and test your changes
 
-Push to your branch (git push origin feat/YourFeature)
+Commit with clear messages: git commit -m "feat: Add ..."
 
-Open a Pull Request
+Push and open a PR against main
 
-Please open issues for bugs or feature requests!
+Please follow the Code of Conduct and check existing issues before submitting.
 
 📄 License
 
 This project is licensed under the MIT License © 2025 Sepehr Fazely
+
